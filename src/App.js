@@ -27,17 +27,16 @@ const App = props => {
   const setUp = () => {
     const width = appRef.current.clientWidth;
     const height = appRef.current.clientHeight;
-    camera = new THREE.PerspectiveCamera(
-      75,
-      width / height,
-      0.1,
-      1000
-    );
+
+    scene.add(mesh);
+
+    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     camera.position.z = 4;
+
     renderer.setClearColor('#000000');
     renderer.setSize(width, height);
+
     appRef.current.appendChild(renderer.domElement);
-    scene.add(mesh);
   };
 
   const start = () => {
@@ -49,11 +48,9 @@ const App = props => {
   const animate = () => {
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
-    renderScene();
+    renderer.render(scene, camera);
     frameId = window.requestAnimationFrame(animate);
   };
-
-  const renderScene = () => renderer.render(scene, camera);
 
   return <div className="app" ref={appRef} />;
 };

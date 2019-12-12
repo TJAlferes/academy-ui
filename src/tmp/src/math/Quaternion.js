@@ -5,6 +5,8 @@
  * @author bhouston / http://clara.io
  */
 
+// https://en.wikipedia.org/wiki/Quaternion
+
 import { _Math } from './Math.js';
 
 function Quaternion(x, y, z, w) {
@@ -114,7 +116,6 @@ Object.defineProperties(Quaternion.prototype, {
 });
 
 Object.assign(Quaternion.prototype, {
-
 	isQuaternion: true,
 
 	set: function (x, y, z, w) {

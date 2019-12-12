@@ -9,16 +9,19 @@ import {
 	LinearToneMapping,
 	BackSide
 } from '../constants.js';
+
 import { _Math } from '../math/Math.js';
 import { DataTexture } from '../textures/DataTexture.js';
 import { Frustum } from '../math/Frustum.js';
 import { Matrix4 } from '../math/Matrix4.js';
-import { ShaderLib } from './shaders/ShaderLib.js';
-import { UniformsLib } from './shaders/UniformsLib.js';
-import { cloneUniforms } from './shaders/UniformsUtils.js';
 import { Vector2 } from '../math/Vector2.js';
 import { Vector3 } from '../math/Vector3.js';
 import { Vector4 } from '../math/Vector4.js';
+
+import { ShaderLib } from './shaders/ShaderLib.js';
+import { UniformsLib } from './shaders/UniformsLib.js';
+import { cloneUniforms } from './shaders/UniformsUtils.js';
+
 import { WebGLAnimation } from './webgl/WebGLAnimation.js';
 import { WebGLAttributes } from './webgl/WebGLAttributes.js';
 import { WebGLBackground } from './webgl/WebGLBackground.js';
