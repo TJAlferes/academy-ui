@@ -9,29 +9,32 @@ const App = props => {
   
   useEffect(() => {
     setUp();
-    start();
     return () => {
       stop();
       appRef.current.removeChild(renderer.domElement);
     };
-  }, []);
+  });
 
-  let frameId;
+  let frameId = null;
   let camera;
   const renderer = new THREE.WebGLRenderer({antialias: true});
   const geometry = new THREE.CubeGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({color: '#C16000'});
+  const material = new THREE.MeshBasicMaterial({color: '#C43039'});
   const mesh = new THREE.Mesh(geometry, material);
   const scene = new THREE.Scene();
 
   const setUp = () => {
+    const fieldOfView = 75;
     const width = appRef.current.clientWidth;
     const height = appRef.current.clientHeight;
+    const aspect = width / height;
+    const near = 0.1;
+    const far = 1000;
+
+    camera = new THREE.PerspectiveCamera(fieldOfView, aspect, near, far);
+    camera.position.z = 4;
 
     scene.add(mesh);
-
-    camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
-    camera.position.z = 4;
 
     renderer.setClearColor('#000000');
     renderer.setSize(width, height);
@@ -40,10 +43,17 @@ const App = props => {
   };
 
   const start = () => {
-    if (!frameId) frameId = requestAnimationFrame(animate);
+    if (frameId) return;
+    else frameId = RAF;
+    RAF();
   };
 
-  const stop = () => cancelAnimationFrame(frameId);
+  const stop = () => {
+    cancelAnimationFrame(frameId);
+    frameId = null;
+  }
+
+  const RAF = () => requestAnimationFrame(animate);
 
   const animate = () => {
     mesh.rotation.x += 0.01;
@@ -52,7 +62,12 @@ const App = props => {
     frameId = window.requestAnimationFrame(animate);
   };
 
-  return <div className="app" ref={appRef} />;
+  return (
+    <div className="app" ref={appRef}>
+      <button onClick={start}>Start</button>
+      <button onClick={stop}>Stop</button>
+    </div>
+  );
 };
 
 /*class App extends Component {
