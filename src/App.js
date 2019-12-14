@@ -1,6 +1,7 @@
 //import React, { Component } from 'react';
 import React, { createRef, useEffect } from 'react';
 import * as THREE from 'three';
+import { TrackballControls} from 'three/examples/jsm/controls/TrackballControls';
 
 import './app.css';
 
@@ -17,11 +18,12 @@ const App = props => {
 
   let frameId = null;
   let camera;
-  const renderer = new THREE.WebGLRenderer({antialias: true});
+  let controls;
   const geometry = new THREE.CubeGeometry(1, 1, 1);
   const material = new THREE.MeshBasicMaterial({color: '#C43039'});
   const mesh = new THREE.Mesh(geometry, material);
   const scene = new THREE.Scene();
+  const renderer = new THREE.WebGLRenderer({antialias: true});
 
   const setUp = () => {
     const fieldOfView = 75;
@@ -32,7 +34,7 @@ const App = props => {
     const far = 1000;
 
     camera = new THREE.PerspectiveCamera(fieldOfView, aspect, near, far);
-    camera.position.z = 4;
+    camera.position.z = 3;
 
     scene.add(mesh);
 
@@ -40,6 +42,9 @@ const App = props => {
     renderer.setSize(width, height);
 
     appRef.current.appendChild(renderer.domElement);
+
+    controls = new TrackballControls(camera, renderer.domElement);  // must be after appendChild
+    controls.rotateSpeed = 1;
   };
 
   const start = () => {
@@ -49,6 +54,7 @@ const App = props => {
   };
 
   const stop = () => {
+    if (frameId === null) return;
     cancelAnimationFrame(frameId);
     frameId = null;
   }
@@ -56,14 +62,17 @@ const App = props => {
   const RAF = () => requestAnimationFrame(animate);
 
   const animate = () => {
+    frameId = requestAnimationFrame(animate);
+    controls.update();
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
     renderer.render(scene, camera);
-    frameId = window.requestAnimationFrame(animate);
   };
 
+  const attempt= () => controls.update();
+
   return (
-    <div className="app" ref={appRef}>
+    <div className="app" ref={appRef} onDrag={attempt}>
       <button onClick={start}>Start</button>
       <button onClick={stop}>Stop</button>
     </div>
