@@ -1,17 +1,23 @@
 import './polyfills.js';
 import { REVISION } from './constants.js';
 
+// renderers/
 export { WebGLMultisampleRenderTarget } from './renderers/WebGLMultisampleRenderTarget.js';
 export { WebGLRenderTargetCube } from './renderers/WebGLRenderTargetCube.js';
 export { WebGLRenderTarget } from './renderers/WebGLRenderTarget.js';
 export { WebGLRenderer } from './renderers/WebGLRenderer.js';
+// renderers/shaders/
 export { ShaderLib } from './renderers/shaders/ShaderLib.js';
 export { UniformsLib } from './renderers/shaders/UniformsLib.js';
 export { UniformsUtils } from './renderers/shaders/UniformsUtils.js';
 export { ShaderChunk } from './renderers/shaders/ShaderChunk.js';
+
+// scenes/
 export { FogExp2 } from './scenes/FogExp2.js';
 export { Fog } from './scenes/Fog.js';
 export { Scene } from './scenes/Scene.js';
+
+// objects/
 export { Sprite } from './objects/Sprite.js';
 export { LOD } from './objects/LOD.js';
 export { SkinnedMesh } from './objects/SkinnedMesh.js';
@@ -24,6 +30,8 @@ export { LineLoop } from './objects/LineLoop.js';
 export { Line } from './objects/Line.js';
 export { Points } from './objects/Points.js';
 export { Group } from './objects/Group.js';
+
+// textures/
 export { VideoTexture } from './textures/VideoTexture.js';
 export { DataTexture } from './textures/DataTexture.js';
 export { DataTexture2DArray } from './textures/DataTexture2DArray.js';
@@ -33,8 +41,14 @@ export { CubeTexture } from './textures/CubeTexture.js';
 export { CanvasTexture } from './textures/CanvasTexture.js';
 export { DepthTexture } from './textures/DepthTexture.js';
 export { Texture } from './textures/Texture.js';
+
+// geometries/
 export * from './geometries/Geometries.js';
+
+// materials/
 export * from './materials/Materials.js';
+
+// loaders/
 export { AnimationLoader } from './loaders/AnimationLoader.js';
 export { CompressedTextureLoader } from './loaders/CompressedTextureLoader.js';
 export { DataTextureLoader } from './loaders/DataTextureLoader.js';
@@ -52,6 +66,8 @@ export { Loader } from './loaders/Loader.js';
 export { LoaderUtils } from './loaders/LoaderUtils.js';
 export { Cache } from './loaders/Cache.js';
 export { AudioLoader } from './loaders/AudioLoader.js';
+
+// lights/
 export { SpotLightShadow } from './lights/SpotLightShadow.js';
 export { SpotLight } from './lights/SpotLight.js';
 export { PointLight } from './lights/PointLight.js';
@@ -65,23 +81,30 @@ export { AmbientLightProbe } from './lights/AmbientLightProbe.js';
 export { LightShadow } from './lights/LightShadow.js';
 export { Light } from './lights/Light.js';
 export { LightProbe } from './lights/LightProbe.js';
+
+// cameras/
 export { StereoCamera } from './cameras/StereoCamera.js';
 export { PerspectiveCamera } from './cameras/PerspectiveCamera.js';
 export { OrthographicCamera } from './cameras/OrthographicCamera.js';
 export { CubeCamera } from './cameras/CubeCamera.js';
 export { ArrayCamera } from './cameras/ArrayCamera.js';
 export { Camera } from './cameras/Camera.js';
+
+// audio/
 export { AudioListener } from './audio/AudioListener.js';
 export { PositionalAudio } from './audio/PositionalAudio.js';
 export { AudioContext } from './audio/AudioContext.js';
 export { AudioAnalyser } from './audio/AudioAnalyser.js';
 export { Audio } from './audio/Audio.js';
+
+// animation/tracks
 export { VectorKeyframeTrack } from './animation/tracks/VectorKeyframeTrack.js';
 export { StringKeyframeTrack } from './animation/tracks/StringKeyframeTrack.js';
 export { QuaternionKeyframeTrack } from './animation/tracks/QuaternionKeyframeTrack.js';
 export { NumberKeyframeTrack } from './animation/tracks/NumberKeyframeTrack.js';
 export { ColorKeyframeTrack } from './animation/tracks/ColorKeyframeTrack.js';
 export { BooleanKeyframeTrack } from './animation/tracks/BooleanKeyframeTrack.js';
+// animation/
 export { PropertyMixer } from './animation/PropertyMixer.js';
 export { PropertyBinding } from './animation/PropertyBinding.js';
 export { KeyframeTrack } from './animation/KeyframeTrack.js';
@@ -89,6 +112,8 @@ export { AnimationUtils } from './animation/AnimationUtils.js';
 export { AnimationObjectGroup } from './animation/AnimationObjectGroup.js';
 export { AnimationMixer } from './animation/AnimationMixer.js';
 export { AnimationClip } from './animation/AnimationClip.js';
+
+// core/
 export { Uniform } from './core/Uniform.js';
 export { InstancedBufferGeometry } from './core/InstancedBufferGeometry.js';
 export { BufferGeometry } from './core/BufferGeometry.js';
@@ -104,10 +129,13 @@ export { Raycaster } from './core/Raycaster.js';
 export { Layers } from './core/Layers.js';
 export { EventDispatcher } from './core/EventDispatcher.js';
 export { Clock } from './core/Clock.js';
+
+// math/interpolants
 export { QuaternionLinearInterpolant } from './math/interpolants/QuaternionLinearInterpolant.js';
 export { LinearInterpolant } from './math/interpolants/LinearInterpolant.js';
 export { DiscreteInterpolant } from './math/interpolants/DiscreteInterpolant.js';
 export { CubicInterpolant } from './math/interpolants/CubicInterpolant.js';
+// math/
 export { Interpolant } from './math/Interpolant.js';
 export { Triangle } from './math/Triangle.js';
 export { _Math as Math } from './math/Math.js';
@@ -129,7 +157,11 @@ export { Vector2 } from './math/Vector2.js';
 export { Quaternion } from './math/Quaternion.js';
 export { Color } from './math/Color.js';
 export { SphericalHarmonics3 } from './math/SphericalHarmonics3.js';
+
+// extras/objects/
 export { ImmediateRenderObject } from './extras/objects/ImmediateRenderObject.js';
+
+// helpers/
 export { VertexNormalsHelper } from './helpers/VertexNormalsHelper.js';
 export { SpotLightHelper } from './helpers/SpotLightHelper.js';
 export { SkeletonHelper } from './helpers/SkeletonHelper.js';
@@ -148,17 +180,26 @@ export { Box3Helper } from './helpers/Box3Helper.js';
 export { PlaneHelper } from './helpers/PlaneHelper.js';
 export { ArrowHelper } from './helpers/ArrowHelper.js';
 export { AxesHelper } from './helpers/AxesHelper.js';
+
+// extras/curves/
 export * from './extras/curves/Curves.js';
+// extras/core
 export { Shape } from './extras/core/Shape.js';
 export { Path } from './extras/core/Path.js';
 export { ShapePath } from './extras/core/ShapePath.js';
 export { Font } from './extras/core/Font.js';
 export { CurvePath } from './extras/core/CurvePath.js';
 export { Curve } from './extras/core/Curve.js';
+// extras/
 export { ImageUtils } from './extras/ImageUtils.js';
 export { ShapeUtils } from './extras/ShapeUtils.js';
+// renderers/webgl
 export { WebGLUtils } from './renderers/webgl/WebGLUtils.js';
+
+// ALL CONSTANTS
 export * from './constants.js';
+
+// all legacy code
 export * from './Three.Legacy.js';
 
 if ( typeof __THREE_DEVTOOLS__ !== 'undefined' ) {

@@ -178,9 +178,9 @@ Object.assign(Vector3.prototype, {
 	applyMatrix3: function (m) {
 		var x = this.x, y = this.y, z = this.z;
 		var e = m.elements;
-		this.x = e[ 0 ] * x + e[ 3 ] * y + e[ 6 ] * z;
-		this.y = e[ 1 ] * x + e[ 4 ] * y + e[ 7 ] * z;
-		this.z = e[ 2 ] * x + e[ 5 ] * y + e[ 8 ] * z;
+		this.x = e[0] * x + e[3] * y + e[6] * z;
+		this.y = e[1] * x + e[4] * y + e[7] * z;
+		this.z = e[2] * x + e[5] * y + e[8] * z;
 		return this;
 	},
 
@@ -192,11 +192,11 @@ Object.assign(Vector3.prototype, {
 		var x = this.x, y = this.y, z = this.z;
 		var e = m.elements;
 
-		var w = 1 / (e[ 3 ] * x + e[ 7 ] * y + e[ 11 ] * z + e[ 15 ]);
+		var w = 1 / (e[3] * x + e[7] * y + e[11] * z + e[15]);
 
-		this.x = (e[ 0 ] * x + e[ 4 ] * y + e[ 8 ] * z + e[ 12 ]) * w;
-		this.y = (e[ 1 ] * x + e[ 5 ] * y + e[ 9 ] * z + e[ 13 ]) * w;
-		this.z = (e[ 2 ] * x + e[ 6 ] * y + e[ 10 ] * z + e[ 14 ]) * w;
+		this.x = (e[0] * x + e[4] * y + e[8] * z + e[12]) * w;
+		this.y = (e[1] * x + e[5] * y + e[9] * z + e[13]) * w;
+		this.z = (e[2] * x + e[6] * y + e[10] * z + e[14]) * w;
 
 		return this;
 	},
@@ -233,9 +233,9 @@ Object.assign(Vector3.prototype, {
 		var x = this.x, y = this.y, z = this.z;
 		var e = m.elements;
 
-		this.x = e[ 0 ] * x + e[ 4 ] * y + e[ 8 ] * z;
-		this.y = e[ 1 ] * x + e[ 5 ] * y + e[ 9 ] * z;
-		this.z = e[ 2 ] * x + e[ 6 ] * y + e[ 10 ] * z;
+		this.x = e[0] * x + e[4] * y + e[8] * z;
+		this.y = e[1] * x + e[5] * y + e[9] * z;
+		this.z = e[2] * x + e[6] * y + e[10] * z;
 
 		return this.normalize();
 	},
@@ -439,9 +439,9 @@ Object.assign(Vector3.prototype, {
 
 	setFromMatrixPosition: function (m) {
 		var e = m.elements;
-		this.x = e[ 12 ];
-		this.y = e[ 13 ];
-		this.z = e[ 14 ];
+		this.x = e[12];
+		this.y = e[13];
+		this.z = e[14];
 		return this;
 	},
 
@@ -467,18 +467,18 @@ Object.assign(Vector3.prototype, {
 
 	fromArray: function (array, offset) {
 		if (offset === undefined) offset = 0;
-		this.x = array[ offset ];
-		this.y = array[ offset + 1 ];
-		this.z = array[ offset + 2 ];
+		this.x = array[offset];
+		this.y = array[offset + 1];
+		this.z = array[offset + 2];
 		return this;
 	},
 
 	toArray: function (array, offset) {
 		if (array === undefined) array = [];
 		if (offset === undefined) offset = 0;
-		array[ offset ] = this.x;
-		array[ offset + 1 ] = this.y;
-		array[ offset + 2 ] = this.z;
+		array[offset] = this.x;
+		array[offset + 1] = this.y;
+		array[offset + 2] = this.z;
 		return array;
 	},
 
