@@ -28,9 +28,7 @@ var _vector = new Vector3();
 
 function BufferGeometry() {
 	Object.defineProperty(this, 'id', {value: _bufferGeometryId += 2});
-
 	this.uuid = _Math.generateUUID();
-
 	this.name = '';
 	this.type = 'BufferGeometry';
 
