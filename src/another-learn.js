@@ -821,20 +821,20 @@ function Molecule(pars) {
     var bb = bbox(this.atoms);
 
     // center model (middle of bounding box)
-    var cx = bb.x[0]+(bb.x[1]-bb.x[0])/2.0;
-    var cy = bb.y[0]+(bb.y[1]-bb.y[0])/2.0;
-    var cz = bb.z[0]+(bb.z[1]-bb.z[0])/2.0;
-    translate(this.atoms, -cx,-cy,-cz);
+    var cx = bb.x[0] + (bb.x[1] - bb.x[0]) / 2.0;
+    var cy = bb.y[0] + (bb.y[1] - bb.y[0]) / 2.0;
+    var cz = bb.z[0] + (bb.z[1] - bb.z[0]) / 2.0;
+    translate(this.atoms, -cx, -cy, -cz);
 
     // scale model (fit in canvas)
-    var max_model = Math.max(bb.x[1]-bb.x[0], bb.y[1]-bb.y[0]);
+    var max_model = Math.max(bb.x[1] - bb.x[0], bb.y[1] - bb.y[0]);
     var min_canvas = Math.min(this.width, this.height);
     var scale = 0.8*min_canvas/max_model;
     rescale(this.atoms, scale);
 
     // copy original atom locations
     this.points = array2d(this.atoms.length, 4);
-    for(var i=0; i<this.atoms.length; i++) {
+    for(var i=0; i < this.atoms.length; i++) {
         this.points[i][0] = this.atoms[i][0];
         this.points[i][1] = this.atoms[i][1];
         this.points[i][2] = this.atoms[i][2];
@@ -844,7 +844,7 @@ function Molecule(pars) {
     rotate(this.atoms, this.points, this.angles);
 
     this.stats_cache = generate_stats(this.atoms.length, this.bonds.length);
-    this.mdiv.children(".dragheader").children(".stats").text( this.stats_cache );
+    this.mdiv.children(".dragheader").children(".stats").text(this.stats_cache);
 
     //this.highlight_elements();
   }
@@ -878,7 +878,7 @@ function Molecule(pars) {
   }
 
   this.animate = function() {
-    if (this.show_stats) var start = (new Date).getTime();
+    if (this.show_stats) var start = (new Date).getTime();  // ?
 
     if (this.autorotation[0]) this.angles[0] += 0.01;
     if (this.autorotation[1]) this.angles[1] += 0.01;

@@ -202,12 +202,10 @@ export * from './constants.js';
 // all legacy code
 export * from './Three.Legacy.js';
 
-if ( typeof __THREE_DEVTOOLS__ !== 'undefined' ) {
-
+if (typeof __THREE_DEVTOOLS__ !== 'undefined') {
 	/* eslint-disable no-undef */
-	__THREE_DEVTOOLS__.dispatchEvent( new CustomEvent( 'register', { detail: {
-		revision: REVISION,
-	} } ) );
+	__THREE_DEVTOOLS__.dispatchEvent(
+    new CustomEvent('register', {detail: {revision: REVISION,}})
+  );
 	/* eslint-enable no-undef */
-
 }
