@@ -1,0 +1,107 @@
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.topLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 44px);
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.buttonLine {
+  position: absolute;
+  width: 100%;
+  height: 54px;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
+.list {
+  flex: none;
+  width: 25%;
+  max-width: 200px;
+  border: 1px solid #aaa;
+  overflow-y: auto;
+  margin: 10px 0 10px 10px;
+  border-radius: 2px;
+}
+
+.list * {
+  user-select: none;
+}
+
+.editor {
+  flex: 1 0 auto;
+  border: 1px solid #aaa;
+  overflow-y: auto;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.buttonsSection {
+  flex: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button {
+  padding: 5px 15px;
+  background-color: #ccc;
+  border: 2px solid #aaa;
+  margin: 0 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.button:hover {
+  border-color: #777;
+}
+
+.icon {
+  composes: fa    from 'font-awesome/css/font-awesome.css';
+  composes: fa-lg from 'font-awesome/css/font-awesome.css';
+  user-select: none;
+  cursor: pointer;
+  padding: 1px 0px;
+  margin-left: 10px;
+}
+
+.saveAsNewIcon {
+  composes: icon;
+  composes: fa-plus from 'font-awesome/css/font-awesome.css';
+}
+
+.updateIcon {
+  composes: icon;
+  composes: fa-floppy-o from 'font-awesome/css/font-awesome.css';
+}
+
+.revertIcon {
+  composes: icon;
+  composes: fa-undo from 'font-awesome/css/font-awesome.css';
+}
+
+.resetIcon {
+  composes: icon;
+  composes: fa-bookmark-o from 'font-awesome/css/font-awesome.css';
+}
+
+.deleteIcon {
+  composes: icon;
+  composes: fa-trash-o from 'font-awesome/css/font-awesome.css';
+}
