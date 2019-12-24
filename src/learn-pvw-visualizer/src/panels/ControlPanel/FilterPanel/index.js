@@ -7,18 +7,12 @@ import style from 'VisualizerStyle/ToggleIcons.mcss';
 import { connect } from 'react-redux';
 import { selectors, actions, dispatch } from '../../../redux';
 
-const ICON_MAPPING = {
-  source: style.sourceIcon,
-  filter: style.filterIcon,
-};
+const ICON_MAPPING = {source: style.sourceIcon, filter: style.filterIcon};
 
 // ----------------------------------------------------------------------------
 
 export function FilterPanel(props) {
-  if (!props.visible) {
-    return null;
-  }
-
+  if (!props.visible) return null;
   return (
     <ActionList
       className={props.className}
@@ -42,7 +36,6 @@ FilterPanel.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => {
   return {

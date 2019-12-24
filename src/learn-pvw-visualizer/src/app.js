@@ -14,10 +14,7 @@ import MainView from './MainView';
 import { getActiveStore, dispatch, actions } from './redux';
 
 function start() {
-  setImmediate(() => {
-    setup(network.getClient().session);
-  });
-
+  setImmediate(() => setup(network.getClient().session));
   // Mount UI
   const container = document.querySelector('.content');
   ReactDOM.unmountComponentAtNode(container);
@@ -42,7 +39,6 @@ export function connect(config = {}) {
   network.onError(loading);
   network.onClose(() => loading('Server disconnected'));
   network.connect(config);
-
   // Configure renderer to local if asked for
   if (config.renderer) {
     dispatch(actions.view.setRemoteRendering(config.renderer === 'remote'));

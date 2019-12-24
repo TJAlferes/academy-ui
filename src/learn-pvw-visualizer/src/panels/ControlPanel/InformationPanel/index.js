@@ -12,12 +12,10 @@ function memoryToString(number) {
   let unitIdx = 0;
   let currentValue = number;
   const units = [' KB', ' MB', ' GB', ' TB'];
-
   while (currentValue > 1000) {
     currentValue /= 1000;
     unitIdx += 1;
   }
-
   return currentValue.toFixed(2) + units[unitIdx];
 }
 
@@ -26,10 +24,7 @@ function memoryToString(number) {
 export class InformationPanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      arrayIdx: 0,
-    };
-
+    this.state = {arrayIdx: 0};
     // callbacks
     this.updateArray = this.updateArray.bind(this);
     this.updateTime = this.updateTime.bind(this);
@@ -37,7 +32,7 @@ export class InformationPanel extends React.Component {
 
   updateArray(event) {
     const arrayIdx = event.target.value;
-    this.setState({ arrayIdx });
+    this.setState({arrayIdx});
   }
 
   updateTime(event) {
@@ -46,9 +41,7 @@ export class InformationPanel extends React.Component {
   }
 
   render() {
-    if (!this.props.visible) {
-      return null;
-    }
+    if (!this.props.visible) return null;
     if (!this.props.proxy) {
       return (
         <center style={{ padding: '20px 10px' }}>
@@ -158,9 +151,7 @@ export class InformationPanel extends React.Component {
             <div className={style.line}>
               <i className={style.iconArray} />
               <select
-                value={
-                  this.state.arrayIdx % this.props.proxy.data.arrays.length
-                }
+                value={this.state.arrayIdx % this.props.proxy.data.arrays.length}
                 onChange={this.updateArray}
               >
                 {this.props.proxy.data.arrays.map((a, idx) => (
@@ -225,7 +216,6 @@ InformationPanel.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => {
   return {

@@ -21,7 +21,6 @@ function eventNotHandled(e) {
 export class PipelineBrowser extends React.Component {
   constructor(props) {
     super(props);
-
     // callbacks
     this.applyChanges = this.applyChanges.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -35,24 +34,19 @@ export class PipelineBrowser extends React.Component {
       const [id, name] = key.split(':');
       const value = changeSet[key];
       ids[id] = true;
-      changeToPush.push({ id, name, value });
+      changeToPush.push({id, name, value});
     });
     const owners = [];
     ['source', 'representation', 'view'].forEach((name) => {
-      if (this.props[name]) {
-        owners.push(this.props[name].id);
-      }
+      if (this.props[name]) owners.push(this.props[name].id);
     });
-
     this.props.propertyChange({ changeSet: changeToPush, owners });
   }
 
   handleChange(event) {
     switch (event.type) {
       case 'active': {
-        if (event.changeSet.length) {
-          this.props.setActiveSource(event.changeSet[0].id);
-        }
+        if (event.changeSet.length) this.props.setActiveSource(event.changeSet[0].id);
         break;
       }
       case 'visibility': {
@@ -61,10 +55,9 @@ export class PipelineBrowser extends React.Component {
           const id = idMapOfSourceToRep[node.id];
           const name = 'Visibility';
           const value = node.visible ? 1 : 0;
-
-          return { id, name, value };
+          return {id, name, value};
         });
-        this.props.propertyChange({ changeSet, invalidatePipeline: true });
+        this.props.propertyChange({changeSet, invalidatePipeline: true});
         break;
       }
       case 'delete': {
@@ -79,14 +72,11 @@ export class PipelineBrowser extends React.Component {
 
   updateColorBy(event) {
     const fn = this.props[event.type] || eventNotHandled;
-
     // Ensure proxy refresh when editing them
     if (event.type === 'propertyChange') {
       const owners = [];
       ['source', 'representation', 'view'].forEach((name) => {
-        if (this.props[name]) {
-          owners.push(this.props[name].id);
-        }
+        if (this.props[name]) owners.push(this.props[name].id);
       });
       event.owners = owners;
     }
@@ -94,15 +84,12 @@ export class PipelineBrowser extends React.Component {
   }
 
   render() {
-    if (!this.props.visible) {
-      return null;
-    }
+    if (!this.props.visible) return null;
     const sections = [
       this.props.source,
       this.props.representation,
       this.props.view,
     ].filter((i) => !!i);
-
     return (
       <div className={style.container}>
         <div className={style.pipelineContainer}>
@@ -188,13 +175,12 @@ PipelineBrowser.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => {
   const props = {
     opacityPoints: selectors.colors.getPiecewisePoints(state),
     idMapOfSourceToRep: selectors.proxies.getSourceToRepresentationMap(state),
-    playing: selectors.time.isAnimationPlaying(state), // fix perf issue with Properties UI
+    playing: selectors.time.isAnimationPlaying(state),  // fix perf issue with Properties UI
     presets: selectors.colors.getPresetsImages(state),
     pipeline: selectors.proxies.getPipeline(state),
     source: selectors.proxies.getSourcePropertyGroup(state),
@@ -206,21 +192,12 @@ export default connect((state) => {
 
     propertyChange: ({ changeSet, invalidatePipeline, owners }) => {
       dispatch(actions.proxies.applyChangeSet(changeSet, owners));
-      if (invalidatePipeline) {
-        dispatch(actions.proxies.fetchPipeline());
-      }
-
+      if (invalidatePipeline) dispatch(actions.proxies.fetchPipeline());
       // Make sure we update the full proxy not just the edited properties
-      if (owners) {
-        owners.forEach((id) => dispatch(actions.proxies.fetchProxy(id)));
-      }
+      if (owners) owners.forEach((id) => dispatch(actions.proxies.fetchProxy(id)));
     },
-    deleteProxy: (id) => {
-      dispatch(actions.proxies.deleteProxy(id));
-    },
-    setActiveSource: (id) => {
-      dispatch(actions.active.activate(id, 'source'));
-    },
+    deleteProxy: (id) => dispatch(actions.proxies.deleteProxy(id)),
+    setActiveSource: (id) => dispatch(actions.active.activate(id, 'source')),
     updateScalarRange: ({ options }) => {
       dispatch(actions.colors.rescaleTransferFunction(options));
       dispatch(
@@ -291,9 +268,7 @@ export default connect((state) => {
     },
     onOpacityEditModeChange(isEditing) {
       // Extract updates to push
-      if (!isEditing) {
-        dispatch(actions.colors.pushPendingServerOpacityPoints());
-      }
+      if (!isEditing) dispatch(actions.colors.pushPendingServerOpacityPoints());
     },
   };
   return props;

@@ -28,14 +28,14 @@ export class FileBrowser extends React.Component {
 
   group(name, files) {
     const basePath = [].concat(this.props.activePath.split('/'));
-    basePath.shift(); // Remove the front 'Home'
+    basePath.shift();  // Remove the front 'Home'
     const fullPathFiles = files.map((f) => [].concat(basePath, f).join('/'));
     this.props.openFiles(fullPathFiles);
   }
 
   file(name) {
     const pathList = [].concat(this.props.activePath.split('/'), name);
-    pathList.shift(); // Remove the front 'Home'
+    pathList.shift();  // Remove the front 'Home'
     const fullPath = pathList.join('/');
     this.props.openFiles(fullPath);
   }
@@ -45,10 +45,7 @@ export class FileBrowser extends React.Component {
   }
 
   render() {
-    if (!this.props.visible || !this.props.fileListing) {
-      return null;
-    }
-
+    if (!this.props.visible || !this.props.fileListing) return null;
     return (
       <FileBrowserWidget
         className={this.props.className}
@@ -80,7 +77,6 @@ FileBrowser.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect(
   (state) => {

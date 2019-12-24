@@ -6,17 +6,19 @@ import {
   getActiveRepresentationId,
 } from './proxies';
 
+
+
 // ----------------------------------------------------------------------------
 // Pure state selection
 // ----------------------------------------------------------------------------
 
-export const getPiecewiseMap = (state) =>
-  access(state).colors.piecewiseFunctions;
-export const getGaussianMap = (state) =>
-  access(state).colors.piecewiseGaussians;
+export const getPiecewiseMap = (state) => access(state).colors.piecewiseFunctions;
+export const getGaussianMap = (state) => access(state).colors.piecewiseGaussians;
 export const getPresetsImages = (state) => access(state).colors.presetImages;
 export const getScalarBarImages = (state) => access(state).colors.images;
 export const getScalarBarRanges = (state) => access(state).colors.ranges;
+
+
 
 // ----------------------------------------------------------------------------
 // Composite selector

@@ -18,12 +18,9 @@ function getImageProvider(key) {
 }
 
 function addListener(callback, key, called = false) {
-  if (!listeners[key]) {
-    listeners[key] = [];
-  }
+  if (!listeners[key]) listeners[key] = [];
   const id = listeners[key].length;
   listeners[key].push({ called, callback });
-
   return id;
 }
 
@@ -32,7 +29,6 @@ function onImageProvider(callback, key = DEFAULT_IMAGE_PROVIDER) {
     callback(providers[key]);
     return addListener(callback, key, true);
   }
-
   return addListener(callback, key);
 }
 
@@ -42,9 +38,7 @@ function unsubscribe(id, key = DEFAULT_IMAGE_PROVIDER) {
 
 function reset(key) {
   const listenersToReset = listeners[key || DEFAULT_IMAGE_PROVIDER] || [];
-  listenersToReset.forEach((listener) => {
-    listener.called = false;
-  });
+  listenersToReset.forEach((listener) => listener.called = false);
 }
 
 export default {

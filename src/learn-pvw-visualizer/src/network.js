@@ -39,23 +39,17 @@ function start(conn) {
     customProtocols
   );
 
-  if (readyCallback) {
-    readyCallback();
-  }
+  if (readyCallback) readyCallback();
 }
 
 function error(sConnect, message) {
   console.log('error', sConnect, message);
-  if (errorCallback) {
-    errorCallback(message);
-  }
+  if (errorCallback) errorCallback(message);
 }
 
 function close(sConnect) {
   console.log('close', sConnect);
-  if (closeCallback) {
-    closeCallback(sConnect);
-  }
+  if (closeCallback) closeCallback(sConnect);
 }
 
 function exit(timeout = 60) {
@@ -82,11 +76,8 @@ function getConnection() {
 }
 
 function onReady(callback) {
-  if (client && client.session.isOpen) {
-    callback();
-  } else {
-    readyCallback = callback;
-  }
+  if (client && client.session.isOpen) callback();
+  else readyCallback = callback;
 }
 
 function onError(callback) {

@@ -100,7 +100,7 @@ export class Visualizer extends React.Component {
   }
 
   toggleMenu() {
-    this.setState((prevState) => ({ menuVisible: !prevState.menuVisible }));
+    this.setState((prevState) => ({menuVisible: !prevState.menuVisible}));
   }
 
   localImageReady(img) {
@@ -110,13 +110,11 @@ export class Visualizer extends React.Component {
   }
 
   busyStatusUpdated(status) {
-    this.setState({ isRendererBusy: status });
+    this.setState({isRendererBusy: status});
   }
 
   render() {
-    const Renderer = this.props.remoteRendering
-      ? VtkRenderer
-      : VtkGeometryRenderer;
+    const Renderer = this.props.remoteRendering ? VtkRenderer : VtkGeometryRenderer;
     return (
       <div className={style.container}>
         <div className={style.topBar}>
@@ -125,8 +123,8 @@ export class Visualizer extends React.Component {
               <InlineSvgIconWidget
                 className={
                   this.props.pendingCount || this.state.isRendererBusy
-                    ? style.networkActive
-                    : style.networkIdle
+                  ? style.networkActive
+                  : style.networkIdle
                 }
                 height="34px"
                 width="34px"
@@ -216,17 +214,12 @@ export default connect(
     const remoteRendering = selectors.view.getRemoteRenderingState(state);
     const remoteFps = selectors.view.getRemoteFpsState(state);
     const viewId = selectors.active.getActiveView(state);
-    const provideOnImageReady = selectors.ui.getVisiblePanel(state) === 3; // SavePanel visible
-    const interactiveQuality = selectors.view.getRemoteInteractiveQualityState(
-      state
-    );
-    const interactiveRatio = selectors.view.getRemoteInteractiveRatioState(
-      state
-    );
+    const provideOnImageReady = selectors.ui.getVisiblePanel(state) === 3;  // SavePanel visible
+    const interactiveQuality = selectors.view.getRemoteInteractiveQualityState(state);
+    const interactiveRatio = selectors.view.getRemoteInteractiveRatioState(state);
     const throttleTime = selectors.view.getThrottleTime(state);
     const maxFPS = selectors.view.getServerMaxFPS(state);
     const progress = selectors.network.getProgressUpdate(state);
-
     return {
       client,
       connection,

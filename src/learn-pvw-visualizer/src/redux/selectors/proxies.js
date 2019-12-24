@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import access from './stateAccessor';
 
+
+
 // ----------------------------------------------------------------------------
 // Convenience methods to traverse through a proxies property and ui arrays
 // to update the collapsed state of the various collapsible groups that may be
@@ -11,13 +13,8 @@ function checkPropertyList(propList, uiList, groupCollapseState) {
   propList.forEach((prop, idx) => {
     const ui = uiList[idx];
     const id = [prop.id, prop.name].join(':');
-    if (id in groupCollapseState) {
-      prop.value = !groupCollapseState[id];
-    }
-
-    if (prop.children) {
-      checkPropertyList(prop.children, ui.children, groupCollapseState);
-    }
+    if (id in groupCollapseState) prop.value = !groupCollapseState[id];
+    if (prop.children) checkPropertyList(prop.children, ui.children, groupCollapseState);
   });
 }
 
@@ -25,6 +22,8 @@ function decorateCollapsibleGroups(proxy, groupCollapseState) {
   checkPropertyList(proxy.properties, proxy.ui, groupCollapseState);
   return proxy;
 }
+
+
 
 // ----------------------------------------------------------------------------
 // Pure state selection
@@ -59,22 +58,23 @@ export const isRenderViewSettingsCollapsed = (state) =>
 export const getRenderViewSettingsProxyId = (state) =>
   access(state).proxies.settings.RenderViewSettings;
 
+
+
 // ----------------------------------------------------------------------------
 // Composite selector
 // ----------------------------------------------------------------------------
 
 export const getActiveSource = createSelector(
   [getActiveSourceId, getProxyMapById],
-  (sourceId, proxyMapById) =>
-    sourceId && proxyMapById ? proxyMapById[sourceId] : undefined
+  (sourceId, proxyMapById) => sourceId && proxyMapById ? proxyMapById[sourceId] : undefined
 );
 
 export const getActiveRepresentationId = createSelector(
   [getActiveSourceId, getSourceToRepresentationMap],
   (sourceId, sourceToRepresentation) =>
     sourceId && sourceToRepresentation
-      ? sourceToRepresentation[sourceId]
-      : undefined
+    ? sourceToRepresentation[sourceId]
+    : undefined
 );
 
 export const getActiveRepresentation = createSelector(
@@ -84,8 +84,7 @@ export const getActiveRepresentation = createSelector(
 
 export const getActiveView = createSelector(
   [getActiveViewId, getProxyMapById],
-  (viewId, proxyMapById) =>
-    viewId && proxyMapById ? proxyMapById[viewId] : undefined
+  (viewId, proxyMapById) => viewId && proxyMapById ? proxyMapById[viewId] : undefined
 );
 
 export const getRenderViewSettingsProxy = createSelector(
@@ -97,53 +96,51 @@ export const getRenderViewSettingsPropertyGroup = createSelector(
   [getRenderViewSettingsProxy, isRenderViewSettingsCollapsed, getCollapseState],
   (proxy, collapsed, groupState) =>
     proxy
-      ? Object.assign(
-          { name: 'Global Settings', collapsed },
-          decorateCollapsibleGroups(proxy, groupState)
-        )
-      : undefined
+    ? Object.assign(
+        {name: 'Global Settings', collapsed},
+        decorateCollapsibleGroups(proxy, groupState)
+      )
+    : undefined
 );
 
 export const getSourcePropertyGroup = createSelector(
   [getActiveSource, isSourceCollapsed, getCollapseState],
   (proxy, collapsed, groupState) =>
     proxy
-      ? Object.assign(
-          { name: 'Source', collapsed },
-          decorateCollapsibleGroups(proxy, groupState)
-        )
-      : undefined
+    ? Object.assign(
+        {name: 'Source', collapsed},
+        decorateCollapsibleGroups(proxy, groupState)
+      )
+    : undefined
 );
 
 export const getRepresentationPropertyGroup = createSelector(
   [getActiveRepresentation, isRepresentationCollapsed, getCollapseState],
   (proxy, collapsed, groupState) =>
     proxy
-      ? Object.assign(
-          { name: 'Representation', collapsed },
-          decorateCollapsibleGroups(proxy, groupState)
-        )
-      : undefined
+    ? Object.assign(
+        {name: 'Representation', collapsed},
+        decorateCollapsibleGroups(proxy, groupState)
+      )
+    : undefined
 );
 
 export const getViewPropertyGroup = createSelector(
   [getActiveView, isViewCollapsed, getCollapseState],
   (proxy, collapsed, groupState) =>
     proxy
-      ? Object.assign(
-          { name: 'View', collapsed },
-          decorateCollapsibleGroups(proxy, groupState)
-        )
-      : undefined
+    ? Object.assign(
+        {name: 'View', collapsed},
+        decorateCollapsibleGroups(proxy, groupState)
+      )
+    : undefined
 );
 
 export const getAvailableList = createSelector(
   [getAvailableSources, getAvailableFilters, hasSource],
   (sources, filters, addFilter) => {
-    const list = sources.map((name) => ({ name, icon: 'source' }));
-    if (addFilter) {
-      return list.concat(filters.map((name) => ({ name, icon: 'filter' })));
-    }
+    const list = sources.map((name) => ({name, icon: 'source'}));
+    if (addFilter) return list.concat(filters.map((name) => ({name, icon: 'filter'})));
     return list;
   }
 );

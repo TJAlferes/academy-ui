@@ -41,8 +41,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 0
-                  ? style.pipelineButtonActive
-                  : style.pipelineButton
+                ? style.pipelineButtonActive
+                : style.pipelineButton
               }
             />
             <i
@@ -50,8 +50,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 1
-                  ? style.openFileButtonActive
-                  : style.openFileButton
+                ? style.openFileButtonActive
+                : style.openFileButton
               }
             />
             <i
@@ -59,8 +59,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 2
-                  ? style.filterButtonActive
-                  : style.filterButton
+                ? style.filterButtonActive
+                : style.filterButton
               }
             />
             <i
@@ -68,8 +68,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 3
-                  ? style.saveButtonActive
-                  : style.saveButton
+                ? style.saveButtonActive
+                : style.saveButton
               }
             />
             <i
@@ -77,8 +77,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 4
-                  ? style.infoButtonActive
-                  : style.infoButton
+                ? style.infoButtonActive
+                : style.infoButton
               }
             />
           </div>
@@ -88,8 +88,8 @@ export class ControlPanel extends React.Component {
               onClick={this.updateActive}
               className={
                 this.props.activeIdx === 5
-                  ? style.settingsButtonActive
-                  : style.settingsButton
+                ? style.settingsButtonActive
+                : style.settingsButton
               }
             />
             <i className={style.resetCameraIcon} onClick={this.resetCamera} />
@@ -122,7 +122,6 @@ ControlPanel.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => {
   return {

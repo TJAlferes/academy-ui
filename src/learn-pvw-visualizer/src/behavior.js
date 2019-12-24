@@ -14,6 +14,8 @@ export function networkDebugData(req) {
   console.log(req.message, req.data);
 }
 
+
+
 // ----------------------------------------------------------------------------
 // State handling
 // ----------------------------------------------------------------------------
@@ -25,6 +27,8 @@ const previousState = {
   netError: 0,
   needResetCamera: true,
 };
+
+
 
 // ----------------------------------------------------------------------------
 // Dispatch processing in batch mode
@@ -40,6 +44,8 @@ function batchDispatch(dispatch) {
   }
 }
 
+
+
 // ----------------------------------------------------------------------------
 // Helper methods
 // ----------------------------------------------------------------------------
@@ -48,47 +54,35 @@ function findSourceRepresentation(state, sourceId) {
   const sourceProxy = state.proxies.pipeline.sources.find(
     (item) => item.id === sourceId
   );
-  if (sourceProxy) {
-    return sourceProxy.rep;
-  }
+  if (sourceProxy) return sourceProxy.rep;
   return null;
 }
 
 function representationHasScalarImage(state, repId) {
-  if (!repId) {
-    return false;
-  }
+  if (!repId) return false;
   const repProxy = state.proxies.proxies[repId];
-  if (!repProxy) {
-    return false;
-  }
-  if (repProxy.colorBy.mode !== 'array') {
-    return false;
-  }
+  if (!repProxy) return false;
+  if (repProxy.colorBy.mode !== 'array') return false;
   const array = repProxy.colorBy.array[1];
-  if (array && array.length) {
-    return true;
-  }
+  if (array && array.length) return true;
   return false;
 }
+
+
 
 // ----------------------------------------------------------------------------
 // Behavior
 // ----------------------------------------------------------------------------
 
 export default function onChange(state, dispatch) {
-  if (batchDispatchQueue.length) {
-    return;
-  }
+  if (batchDispatchQueue.length) return;
 
   // Fetch active proxy
   if (state.active.source !== previousState.activeSource) {
     previousState.activeSource = state.active.source;
     if (previousState.activeSource && previousState.activeSource !== '0') {
       previousState.activeRepesentation = null;
-      addToDispatchQueue(
-        actions.proxies.fetchProxy(previousState.activeSource)
-      );
+      addToDispatchQueue(actions.proxies.fetchProxy(previousState.activeSource));
     }
   }
 
@@ -148,7 +142,6 @@ export default function onChange(state, dispatch) {
       }
       previousState.netSuccess = state.network.success.length;
     }
-
     // Print network error calls
     if (previousState.netError < state.network.error.length) {
       for (
@@ -176,14 +169,12 @@ export default function onChange(state, dispatch) {
     state.network.success.length > NETWORK_QUEUE_SIZE ||
     state.network.error.length > NETWORK_QUEUE_SIZE
   ) {
-    previousState.netSuccess -=
-      state.network.success.length > NETWORK_QUEUE_SIZE
-        ? state.network.success.length - NETWORK_QUEUE_SIZE
-        : 0;
-    previousState.netError -=
-      state.network.error.length > NETWORK_QUEUE_SIZE
-        ? state.network.error.length - NETWORK_QUEUE_SIZE
-        : 0;
+    previousState.netSuccess -= state.network.success.length > NETWORK_QUEUE_SIZE
+    ? state.network.success.length - NETWORK_QUEUE_SIZE
+    : 0;
+    previousState.netError -= state.network.error.length > NETWORK_QUEUE_SIZE
+    ? state.network.error.length - NETWORK_QUEUE_SIZE
+    : 0;
     addToDispatchQueue(actions.network.freeNetworkRequests(NETWORK_QUEUE_SIZE));
   }
 

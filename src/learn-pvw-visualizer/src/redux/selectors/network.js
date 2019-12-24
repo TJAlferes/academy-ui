@@ -1,6 +1,8 @@
 import { createSelector } from 'reselect';
 import access from './stateAccessor';
 
+
+
 // ----------------------------------------------------------------------------
 // Pure state selection
 // ----------------------------------------------------------------------------
@@ -8,6 +10,8 @@ import access from './stateAccessor';
 export const getPendingRequests = (state) => access(state).network.pending;
 
 export const getProgressUpdate = (state) => access(state).network.progress;
+
+
 
 // ----------------------------------------------------------------------------
 // Composite selector

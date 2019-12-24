@@ -14,20 +14,19 @@ import { selectors, actions, dispatch } from '../../../redux';
 
 const LOCAL_RENDERING_PROPS = {
   id: 'remoteRenderingCheckbox',
-  data: { value: true, id: 'remoteRenderingCheckbox' },
+  data: {value: true, id: 'remoteRenderingCheckbox'},
   show: () => true,
   ui: {
     label: 'Remote Rendering',
     componentLabels: [''],
-    help:
-      'Uncheck for local rendering.  If doing local rendering, all the geometry and the used data arrays will be sent to the browser.',
+    help: 'Uncheck for local rendering.  If doing local rendering, all the geometry and the used data arrays will be sent to the browser.',
   },
   viewData: {},
 };
 
 const SHOW_FPS_PROPS = {
   id: 'showRemoteFpsCheckbox',
-  data: { value: false, id: 'showRemoteFpsCheckbox' },
+  data: {value: false, id: 'showRemoteFpsCheckbox'},
   show: () => true,
   ui: {
     label: 'Show Rendering stats',
@@ -38,7 +37,7 @@ const SHOW_FPS_PROPS = {
 };
 
 const IMAGE_QUALITY_PROPS = {
-  data: { value: 50, id: 'interactiveQuality' },
+  data: {value: 50, id: 'interactiveQuality'},
   show: () => true,
   ui: {
     domain: { min: 1, max: 100, step: 1 },
@@ -50,7 +49,7 @@ const IMAGE_QUALITY_PROPS = {
 };
 
 const IMAGE_RATIO_PROPS = {
-  data: { value: 0.5, id: 'interactiveQuality' },
+  data: {value: 0.5, id: 'interactiveQuality'},
   show: () => true,
   ui: {
     type: 'double',
@@ -63,7 +62,7 @@ const IMAGE_RATIO_PROPS = {
 };
 
 const EVENT_THROTTLE_PROPS = {
-  data: { value: 60, id: 'eventThrottle' },
+  data: {value: 60, id: 'eventThrottle'},
   show: () => true,
   ui: {
     type: 'double',
@@ -76,15 +75,14 @@ const EVENT_THROTTLE_PROPS = {
 };
 
 const SERVER_MAX_FPS_PROPS = {
-  data: { value: 30, id: 'serverFPS' },
+  data: {value: 30, id: 'serverFPS'},
   show: () => true,
   ui: {
     type: 'double',
     domain: { min: 12, max: 60, step: 1 },
     label: 'Max interactive server FPS',
     componentLabels: [''],
-    help:
-      'Adjust the maximum number of images the server will push per seconds.',
+    help: 'Adjust the maximum number of images the server will push per seconds.',
   },
   viewData: {},
 };
@@ -98,28 +96,26 @@ export class SettingPanel extends React.Component {
     // callbacks
     this.applyChanges = this.applyChanges.bind(this);
     this.remoteRenderingBoxChecked = this.remoteRenderingBoxChecked.bind(this);
-    this.remoteRenderingShowFpsBoxChecked = this.remoteRenderingShowFpsBoxChecked.bind(
-      this
-    );
+    this.remoteRenderingShowFpsBoxChecked = this.remoteRenderingShowFpsBoxChecked.bind(this);
 
     // Custom props
     this.checkboxProps = Object.assign({}, LOCAL_RENDERING_PROPS, {
-      onChange: this.remoteRenderingBoxChecked,
+      onChange: this.remoteRenderingBoxChecked
     });
     this.fpsCheckboxProps = Object.assign({}, SHOW_FPS_PROPS, {
-      onChange: this.remoteRenderingShowFpsBoxChecked,
+      onChange: this.remoteRenderingShowFpsBoxChecked
     });
     this.qualitySliderProps = Object.assign({}, IMAGE_QUALITY_PROPS, {
-      onChange: props.updateRemoteRenderingInteractiveQuality,
+      onChange: props.updateRemoteRenderingInteractiveQuality
     });
     this.ratioSliderProps = Object.assign({}, IMAGE_RATIO_PROPS, {
-      onChange: props.updateRemoteRenderingInteractiveRatio,
+      onChange: props.updateRemoteRenderingInteractiveRatio
     });
     this.mouseThrottleProps = Object.assign({}, EVENT_THROTTLE_PROPS, {
-      onChange: props.updateEventThrottling,
+      onChange: props.updateEventThrottling
     });
     this.serverFPSProps = Object.assign({}, SERVER_MAX_FPS_PROPS, {
-      onChange: props.updateServerMaxFPS,
+      onChange: props.updateServerMaxFPS
     });
   }
 
@@ -130,9 +126,8 @@ export class SettingPanel extends React.Component {
       const [id, name] = key.split(':');
       const value = changeSet[key];
       ids[id] = true;
-      changeToPush.push({ id, name, value });
+      changeToPush.push({id, name, value});
     });
-
     this.props.applyChangeSet(changeToPush);
     this.props.fetchSettingProxy();
   }
@@ -146,18 +141,14 @@ export class SettingPanel extends React.Component {
   }
 
   render() {
-    if (!this.props.visible) {
-      return null;
-    }
+    if (!this.props.visible) return null;
 
     // Update custom prop state
     this.checkboxProps.data.value = this.props.isRemoteRenderingEnabled;
     this.fpsCheckboxProps.data.value = this.props.showRemoteRenderingFps;
     this.qualitySliderProps.data.value = this.props.remoteRenderingInteractiveQuality;
     this.ratioSliderProps.data.value = this.props.remoteRenderingInteractiveRatio;
-    this.mouseThrottleProps.data.value = Math.round(
-      1000 / this.props.throttleTime
-    );
+    this.mouseThrottleProps.data.value = Math.round(1000 / this.props.throttleTime);
     this.serverFPSProps.data.value = this.props.serverMaxFPS;
 
     return (

@@ -13,29 +13,16 @@ import { selectors, actions, dispatch } from '../../../redux';
 export class SavePanel extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      url: '',
-      width: '500',
-      height: '500',
-    };
-
+    this.state = {url: '', width: '500', height: '500'};
     // callbacks
     this.saveScreenShot = this.saveScreenShot.bind(this);
     this.updateForm = this.updateForm.bind(this);
     this.updatePath = this.updatePath.bind(this);
     this.resetSize = this.resetSize.bind(this);
-    this.updateLocalScreenShotCollapsableState = this.updateLocalScreenShotCollapsableState.bind(
-      this
-    );
-    this.updateScreenShotCollapsableState = this.updateScreenShotCollapsableState.bind(
-      this
-    );
-    this.updateDataSetCollapsableState = this.updateDataSetCollapsableState.bind(
-      this
-    );
-    this.updateStateCollapsableState = this.updateStateCollapsableState.bind(
-      this
-    );
+    this.updateLocalScreenShotCollapsableState = this.updateLocalScreenShotCollapsableState.bind(this);
+    this.updateScreenShotCollapsableState = this.updateScreenShotCollapsableState.bind(this);
+    this.updateDataSetCollapsableState = this.updateDataSetCollapsableState.bind(this);
+    this.updateStateCollapsableState = this.updateStateCollapsableState.bind(this);
     this.saveDataset = this.saveDataset.bind(this);
     this.saveState = this.saveState.bind(this);
   }
@@ -44,11 +31,11 @@ export class SavePanel extends React.Component {
     ImageProviders.onImageProvider((provider) => {
       if (provider.getLastImageReadyEvent()) {
         const { url } = provider.getLastImageReadyEvent();
-        this.setState({ url });
+        this.setState({url});
       }
       this.subscription = provider.onImageReady((data) => {
         const { url } = data;
-        this.setState({ url });
+        this.setState({url});
       });
     });
   }
@@ -62,7 +49,7 @@ export class SavePanel extends React.Component {
 
   updateForm(event) {
     const { name, value } = event.target;
-    this.setState({ [name]: value });
+    this.setState({[name]: value});
   }
 
   updatePath(event) {
@@ -74,7 +61,7 @@ export class SavePanel extends React.Component {
     const image = new Image();
     image.src = this.screenshot.src;
     const { width, height } = image;
-    this.setState({ width, height });
+    this.setState({width, height});
   }
 
   updateLocalScreenShotCollapsableState(isOpen) {
@@ -111,9 +98,7 @@ export class SavePanel extends React.Component {
   }
 
   render() {
-    if (!this.props.visible) {
-      return null;
-    }
+    if (!this.props.visible) return null;
 
     return (
       <div className={[this.props.className, style.container].join(' ')}>
@@ -162,11 +147,11 @@ export class SavePanel extends React.Component {
             <i
               className={
                 this.props.statuses.screenshot === 'success'
-                  ? style.saveIconSuccess
-                  : this.props.statuses.screenshot &&
-                    this.props.statuses.screenshot.length
-                    ? style.saveIconError
-                    : style.saveIcon
+                ? style.saveIconSuccess
+                : this.props.statuses.screenshot &&
+                  this.props.statuses.screenshot.length
+                  ? style.saveIconError
+                  : style.saveIcon
               }
               title={this.props.statuses.screenshot}
               onClick={this.saveScreenShot}
@@ -191,11 +176,11 @@ export class SavePanel extends React.Component {
             <i
               className={
                 this.props.statuses.dataset === 'success'
-                  ? style.saveIconSuccess
-                  : this.props.statuses.dataset &&
-                    this.props.statuses.dataset.length
-                    ? style.saveIconError
-                    : style.saveIcon
+                ? style.saveIconSuccess
+                : this.props.statuses.dataset &&
+                  this.props.statuses.dataset.length
+                  ? style.saveIconError
+                  : style.saveIcon
               }
               title={this.props.statuses.dataset}
               onClick={this.saveDataset}
@@ -219,11 +204,11 @@ export class SavePanel extends React.Component {
             <i
               className={
                 this.props.statuses.state === 'success'
-                  ? style.saveIconSuccess
-                  : this.props.statuses.state &&
-                    this.props.statuses.state.length
-                    ? style.saveIconError
-                    : style.saveIcon
+                ? style.saveIconSuccess
+                : this.props.statuses.state &&
+                  this.props.statuses.state.length
+                  ? style.saveIconError
+                  : style.saveIcon
               }
               title={this.props.statuses.state}
               onClick={this.saveState}
@@ -266,7 +251,6 @@ SavePanel.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => {
   return {

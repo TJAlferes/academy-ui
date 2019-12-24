@@ -9,7 +9,6 @@ import { selectors, actions, dispatch } from '../../redux';
 export class TimeController extends React.Component {
   constructor(props) {
     super(props);
-
     // callbacks
     this.previous = this.previous.bind(this);
     this.next = this.next.bind(this);
@@ -17,9 +16,7 @@ export class TimeController extends React.Component {
   }
 
   previous() {
-    const timeStep =
-      (this.props.index - 1 + this.props.values.length) %
-      this.props.values.length;
+    const timeStep = (this.props.index - 1 + this.props.values.length) % this.props.values.length;
     this.props.setTimeStep(timeStep);
   }
 
@@ -33,20 +30,18 @@ export class TimeController extends React.Component {
   }
 
   render() {
-    if (!this.props.values.length) {
-      return null;
-    }
+    if (!this.props.values.length) return null;
 
     const timeSize = `${this.props.values.length}`.length * 2 + 1;
     const timeClass = style[`time${timeSize}`];
 
     return (
       <div className={style.container}>
-        {this.props.playing ? (
-          <i className={style.stopButton} onClick={this.togglePlay} />
-        ) : (
-          <i className={style.playButton} onClick={this.togglePlay} />
-        )}
+        {
+          this.props.playing
+          ? (<i className={style.stopButton} onClick={this.togglePlay} />)
+          : (<i className={style.playButton} onClick={this.togglePlay} />)
+        }
         <i onClick={this.previous} className={style.previousButton} />
         <input
           className={timeClass}
@@ -65,8 +60,8 @@ TimeController.propTypes = {
   values: PropTypes.array,
   playing: PropTypes.bool,
   setTimeStep: PropTypes.func.isRequired,
-  playTime: PropTypes.func.isRequired, // eslint-disable-line
-  stopTime: PropTypes.func.isRequired, // eslint-disable-line
+  playTime: PropTypes.func.isRequired,  // eslint-disable-line
+  stopTime: PropTypes.func.isRequired,  // eslint-disable-line
 };
 
 TimeController.defaultProps = {
@@ -76,7 +71,6 @@ TimeController.defaultProps = {
 };
 
 // Binding --------------------------------------------------------------------
-/* eslint-disable arrow-body-style */
 
 export default connect((state) => ({
   setTimeStep(index) {
