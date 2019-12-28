@@ -7,6 +7,8 @@ import NativeUI from './NativeUI';
 import React from './React';
 import Rendering from './Rendering';
 
+// Paraview Web is like a component library for Visualizer (I think)
+
 export {
   Common,
   Component,
